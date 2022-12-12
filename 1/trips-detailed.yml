@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://cdn.raw-labs.com/endpoint-schemaV0.9.json
+raw: 0.9
+endpoint: GET
+metadata:
+  title: An example joining two databases.
+  description: |+ 
+    Example showing how to deliver an API from a query that joins two databases.
+  tags:
+    - postgresql
+    - mysql
+  termsOfService: https://raw-labs.com/terms-of-use/
+  contact:
+    name: RAW Labs Support
+    url: https://discuss.raw-labs.com/
+    email: support@raw-labs.com
+  license:
+    name: Apache v2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 1.0
+code: snapi
+declaration: trips_detailed
+codeFile: code.snapi
+format: json
+security:
+  public: true
+computeClass: normal
+enabled: true

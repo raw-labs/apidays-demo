@@ -1,0 +1,52 @@
+trips() =
+    let
+        trips = PostgreSQL.InferAndRead(
+            "raw", "example", "trips",
+            host = "example-psql.raw-labs.com",
+            username = Environment.Secret("PGSQL_USERNAME"),
+            password = Environment.Secret("PGSQL_PASSWORD")
+        ),
+    in
+        trips    
+
+trips_detailed() =
+    let
+        trips = PostgreSQL.InferAndRead(
+            "raw", "example", "trips",
+            host = "example-psql.raw-labs.com",
+            username = Environment.Secret("PGSQL_USERNAME"),
+            password = Environment.Secret("PGSQL_PASSWORD")
+        ),
+        airports = MySQL.InferAndRead(
+            "raw", "airports",
+            host = "example-mysql.raw-labs.com",
+            username = Environment.Secret("MYSQL_USERNAME"),
+            password = Environment.Secret("MYSQL_PASSWORD")
+        )
+    in
+        Collection.EquiJoin(trips, airports, trip -> trip.destination, airport -> airport.iata_faa)
+
+
+// trips_detailed(pattern: string = "*") =
+//     let
+//         trips = PostgreSQL.InferAndRead(
+//             "raw", "example", "trips",
+//             host = "example-psql.raw-labs.com",
+//             username = Environment.Secret("PGSQL_USERNAME"),
+//             password = Environment.Secret("PGSQL_PASSWORD")
+//         ),
+//         airports = MySQL.InferAndRead(
+//             "raw", "airports",
+//             host = "example-mysql.raw-labs.com",
+//             username = Environment.Secret("MYSQL_USERNAME"),
+//             password = Environment.Secret("MYSQL_PASSWORD")
+//         ),
+//         join = Collection.EquiJoin(trips, airports, trip -> trip.destination, airport -> airport.iata_faa)
+//     in
+//         Collection.Filter(join, j -> Regex.Matches(j.iata_faa, pattern))
+
+// Create test!
+// Try it locally.
+// Create PR.
+
+main()
