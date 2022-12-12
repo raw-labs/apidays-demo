@@ -25,3 +25,6 @@ security:
   public: true
 computeClass: normal
 enabled: true
+tests:
+  - name: Simple test
+    description: A simple test.
