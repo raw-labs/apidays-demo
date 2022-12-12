@@ -5,9 +5,9 @@ trips() =
             host = "example-psql.raw-labs.com",
             username = Environment.Secret("PGSQL_USERNAME"),
             password = Environment.Secret("PGSQL_PASSWORD")
-        ),
+        )
     in
-        trips    
+        trips
 
 trips_detailed() =
     let
