@@ -44,9 +44,3 @@ trips_detailed() =
 //         join = Collection.EquiJoin(trips, airports, trip -> trip.destination, airport -> airport.iata_faa)
 //     in
 //         Collection.Filter(join, j -> Regex.Matches(j.iata_faa, pattern))
-
-// Create test!
-// Try it locally.
-// Create PR.
-
-main()
