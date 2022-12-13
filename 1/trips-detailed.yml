@@ -28,3 +28,8 @@ enabled: true
 tests:
   - name: Simple test
     description: A simple test.
+  - name: Simple test arguments
+    description: A simple test with arguments.
+    arguments:
+    - key: pattern
+      value: Iceland
