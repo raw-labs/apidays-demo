@@ -9,7 +9,7 @@ trips() =
     in
         trips
 
-trips_detailed() =
+trips_detailed(pattern: string = ".*") =
     let
         trips = PostgreSQL.InferAndRead(
             "raw", "example", "trips",
@@ -22,6 +22,7 @@ trips_detailed() =
             host = "example-mysql.raw-labs.com",
             username = Environment.Secret("MYSQL_USERNAME"),
             password = Environment.Secret("MYSQL_PASSWORD")
-        )
+        ),
+        join = Collection.EquiJoin(trips, airports, trip -> trip.destination, airport -> airport.iata_faa)
     in
-        Collection.EquiJoin(trips, airports, trip -> trip.destination, airport -> airport.iata_faa)
+        Collection.Filter(join, j -> Regex.Matches(j.country, pattern))
